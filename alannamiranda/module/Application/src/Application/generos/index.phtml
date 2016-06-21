@@ -1,0 +1,18 @@
+<?php 
+$title = "Gêneros";
+$this->headTitle($title);
+?> 
+<h1><?= $this->escapeHtml($title) ?></h1>
+
+<table class:"table">
+	<tr>
+		<th>Id</th>
+		<th>Descrição</th>
+	</tr>
+	<?php foreach ($generos as $generos): ?>
+	<tr>
+		<td><?= $this->escapeHtml($genero->Id) ?></td>
+		<td><?= $this->escapeHtml($genero->Descrição) ?></td>
+	</tr>
+	<?php endforeach; ?>
+</table>

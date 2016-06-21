@@ -10,8 +10,38 @@
 namespace Application;
 
 return array(
+    'doctrine' => array(
+        'driver' => array(
+            __NAMESPACE__ . '_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
+                ),
+                'orm_default' => array(
+                    'drivers' => array(
+                        __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                        
+             )
+          )
+      )   
+  ),
+    
     'router' => array(
         'routes' => array(
+            'genero' =>array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/genero[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z0-9_=]*',
+                        'id' => '[0-9]+'
+                    ),
+                    'default' => array(
+                        'controller' => 'Application\Controller\Genero',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
             'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -75,7 +105,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => Controller\IndexController::class
+            'Application\Controller\Index' => Controller\IndexController::class,
+            'Application\Controller\Genero' => Controller\GeneroController::class
         ),
     ),
     'view_manager' => array(
